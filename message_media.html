@@ -1,0 +1,19 @@
+{{foreach from=$json key=k item=v}}
+<div class="media" data-id="{{$json[$k].id}}">
+    <div class="media-left"><img src="img/{{$json[$k].picture}}" class="media-object"></div>
+    <div class="media-body">
+        <h4 class="media-heading">{{$json[$k].name}} <small><i>{{$json[$k].timestamp|date_format}}</i></small></h4>
+        <p class="media-text">{{$json[$k].text}}</p>
+        <div class="media-bottom-group">
+            {{if $json[$k].has_like == true}}
+            <a class="media-bottom-item media-like" data-like-type="minus">{{$like_back}} ({{$json[$k].like_count}})</a>
+            {{else}}
+            <a class="media-bottom-item media-like" data-like-type="plus">{{$like}} ({{$json[$k].like_count}})</a>
+            {{/if}}
+            {{if $json[$k].account_id == $data_account_id || $data_account_id == 4}}
+            <a class="media-bottom-item media-delete">刪除</a>
+            {{/if}}
+        </div>
+    </div>
+</div>
+{{/foreach}}
